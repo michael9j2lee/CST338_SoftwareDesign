@@ -25,10 +25,18 @@ public class Main
       myCardTable.setVisible(true);
 
       // CREATE LABELS ----------------------------------------------------
-      //code goes here ...
+      for (k = 0; k < NUM_CARDS_PER_HAND; k++)
+      {
+        	 computerLabels[k] = new JLabel();
+        	 humanLabels[k] = new JLabel();
+         }
   
       // ADD LABELS TO PANELS -----------------------------------------
-//      code goes here ...
+      for (k = 0; k < NUM_CARDS_PER_HAND; k++)
+      {
+          myCardTable.pnlComputerHand.add(computerLabels[k]);
+      	  myCardTable.pnlHumanHand.add(computerLabels[k]);
+      }
       
       // and two random cards in the play region (simulating a computer/hum ply)
 //      code goes here ...

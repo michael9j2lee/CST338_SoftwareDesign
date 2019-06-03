@@ -1,3 +1,13 @@
+/**
+ * Deck class to keep track of the whole deck of cards for a card game
+ * interacts with Hand and Card classes
+ * 
+ * @author Jasper Kolp
+ * @author Kate Adler
+ * @author Michael Lee
+ * @author Michael Garber
+ */
+
 class Hand {
    private Card[] myCards;
    private int numCards;
@@ -89,12 +99,3 @@ class Hand {
    }
 }
 
-/**
- * Deck class to keep track of the whole deck of cards for a card game
- * interacts with Hand and Card classes
- * 
- * @author Jasper Kolp
- * @author Kate Adler
- * @author Michael Lee
- * @author Michael Garber
- */
