@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Deck class to keep track of the whole deck of cards for a card game
  * interacts with Hand and Card classes
@@ -97,5 +99,31 @@ class Hand {
       else 
          return this.myCards[k];
    }
+   
+   public void sort()
+   {
+	   Arrays.sort(myCards);
+   }
+   
+   public Card playCard(int cardIndex)
+   {
+      if ( numCards == 0 ) //error
+      {
+         //Creates a card that does not work
+         return new Card('M', Card.Suit.SPADES);
+      }
+      //Decreases numCards.
+      Card card = myCards[cardIndex];
+      
+      numCards--;
+      for(int i = cardIndex; i < numCards; i++)
+      {
+         myCards[i] = myCards[i+1];
+      }
+      
+      myCards[numCards] = null;
+      
+      return card;
+    }
 }
 

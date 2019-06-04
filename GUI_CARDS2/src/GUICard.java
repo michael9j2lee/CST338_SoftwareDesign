@@ -58,6 +58,7 @@ public class GUICard {
 	  private static int valueAsInt(Card card)
 	   {
 		   char value = card.getValue();
+		   //System.out.printf("Value : %s%n",value);
 		   switch (value)
 		   {
 		   case 'A':
@@ -73,7 +74,8 @@ public class GUICard {
 		   case 'X':
 			   return 0;
 		   default:
-			   int val = value;
+			   int val = value - '0';
+			   //System.out.printf("DEFAULT : %d%n", val);
 			   return (val);
 		   }
 				   

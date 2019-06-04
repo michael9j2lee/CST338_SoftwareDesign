@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 public class CardTable extends JFrame{
 	static int MAX_CARDS_PER_HAND = 56;
@@ -32,22 +33,34 @@ public class CardTable extends JFrame{
 		this.numCardsPerHand = numCardsPerHand;
 		pnlComputerHand = new JPanel();
 		pnlComputerHand.setLayout(new GridLayout(1,numCardsPerHand));
-		pnlComputerHand.setBorder(BorderFactory.createLineBorder(Color.black));
-		pnlComputerHand.setPreferredSize(size);
 		
+		pnlComputerHand.setPreferredSize(size);
+		TitledBorder borderComp = new TitledBorder("Computer Hand");
+		borderComp.setTitleJustification(TitledBorder.LEFT);
+		borderComp.setTitlePosition(TitledBorder.TOP);
+		pnlComputerHand.setBorder(borderComp);
 		this.add(pnlComputerHand, BorderLayout.NORTH);
+		
 		pnlHumanHand = new JPanel();
+		TitledBorder borderHuman = new TitledBorder("Computer Hand");
+		borderHuman.setTitleJustification(TitledBorder.LEFT);
+		borderHuman.setTitlePosition(TitledBorder.TOP);
+		pnlHumanHand.setBorder(borderHuman);
 		pnlHumanHand.setLayout(new GridLayout(1,5));
-		pnlHumanHand.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.add(pnlHumanHand, BorderLayout.CENTER);
+		//pnlHumanHand.setBorder(BorderFactory.createLineBorder(Color.black));
 		pnlHumanHand.setPreferredSize(size);
+		this.add(pnlHumanHand, BorderLayout.SOUTH);
+		
 		
 		pnlPlayArea = new JPanel();
+		TitledBorder borderPlay = new TitledBorder("Playing Area");
+		borderPlay.setTitleJustification(TitledBorder.LEFT);
+		borderPlay.setTitlePosition(TitledBorder.TOP);
+		pnlPlayArea.setBorder(borderPlay);
 		pnlPlayArea.setLayout(new GridLayout(1,numCardsPerHand));
-		pnlPlayArea.setBorder(BorderFactory.createLineBorder(Color.black));
 		pnlPlayArea.setPreferredSize(size);
-		
-		this.add(pnlHumanHand,BorderLayout.SOUTH);
+		pnlPlayArea.setPreferredSize(size);
+		this.add(pnlPlayArea,BorderLayout.CENTER);
 	}
 	
 
