@@ -26,7 +26,7 @@ public class GUICard {
 		   {
 			   String filename = new String();
 			   filename = "images/" + turnIntIntoCardValue(i) + turnIntIntoCardSuit(k) +".gif";
-			   System.out.print(filename);
+			   //System.out.print(filename);
 			   Icon image= new ImageIcon(filename);
 			   iconCards[i][k] = image;
 			   
@@ -83,7 +83,7 @@ public class GUICard {
 	   private static int suitAsInt(Card card)
 	   {
 		   Card.Suit suit = card.getSuit();
-
+		   //System.out.println("CARD =" +card.toString());
 		   if (suit == Card.Suit.SPADES)
 		   {
 			   	return 0;	   

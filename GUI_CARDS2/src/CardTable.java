@@ -57,10 +57,11 @@ public class CardTable extends JFrame{
 		borderPlay.setTitleJustification(TitledBorder.LEFT);
 		borderPlay.setTitlePosition(TitledBorder.TOP);
 		pnlPlayArea.setBorder(borderPlay);
-		pnlPlayArea.setLayout(new GridLayout(1,numCardsPerHand));
+		pnlPlayArea.setLayout(new GridLayout(2,numCardsPerHand));
 		pnlPlayArea.setPreferredSize(size);
 		pnlPlayArea.setPreferredSize(size);
 		this.add(pnlPlayArea,BorderLayout.CENTER);
+
 	}
 	
 

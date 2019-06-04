@@ -28,38 +28,63 @@ public class Main
 
       
       // CREATE LABELS ----------------------------------------------------
-      for (k = 0; k < NUM_CARDS_PER_HAND; k++)
+      for (int a = 0; a < NUM_CARDS_PER_HAND; a++)
       {
-        	 computerLabels[k] = new JLabel();
-        	 humanLabels[k] = new JLabel();
-         }
+    	 computerLabels[a] = new JLabel();
+    	 
+    	 humanLabels[a] = new JLabel();
+      }
+      
+      for (int b = 0; b < NUM_PLAYERS ; b++)
+      {
+    	  playedCardLabels[b] = new JLabel();
+    	  playedCardLabels[b].setHorizontalAlignment(JLabel.CENTER);
+    	  playLabelText[b] = new JLabel();
+    	  playLabelText[b].setHorizontalAlignment(JLabel.CENTER);
+      }
+
+      
       
       GUICard.loadCardIcons();
+      Hand compHand = new Hand();
+      Hand playerHand = new Hand();
+      Deck deck = new Deck();
+      
       
       // ADD LABELS TO PANELS -----------------------------------------
       for (k = 0; k < NUM_CARDS_PER_HAND; k++)
       {
+    	  compHand.takeCard(generateRandomCard(deck));
     	  computerLabels[k].setIcon(GUICard.getBackCardIcon());
           myCardTable.pnlComputerHand.add(computerLabels[k]);
-          humanLabels[k].setIcon(GUICard.getIcon(generateRandomCard()));
+          //System.out.printf("CompHand : %d ||| %s%n",k, compHand.inspectCard(k).toString());
+          
+          playerHand.takeCard(generateRandomCard(deck));
+          humanLabels[k].setIcon(GUICard.getIcon(playerHand.inspectCard(k)));
       	  myCardTable.pnlHumanHand.add(humanLabels[k]);
+      	  //System.out.printf("PlayerHand : %d ||| %s%n",k, playerHand.inspectCard(k).toString());
       }
-      
-      
 
-      
+
+      playedCardLabels[0].setIcon(GUICard.getIcon(compHand.inspectCard(0)));
+	  myCardTable.pnlPlayArea.add(playedCardLabels[0]);
+
+	  playedCardLabels[1].setIcon(GUICard.getIcon(playerHand.inspectCard(0)));
+	  myCardTable.pnlPlayArea.add(playedCardLabels[1]);
+	  myCardTable.pnlPlayArea.add(playLabelText[0]);
+	  myCardTable.pnlPlayArea.add(playLabelText[1]);
+	  
+	  
     
-      
-      // and two random cards in the play region (simulating a computer/hum ply)
-//      code goes here ...
+      playLabelText[0].setText("Computer");
+	  playLabelText[1].setText("You");
 
       // show everything to the user
       myCardTable.setVisible(true);
    }
    
-   static Card generateRandomCard()
+   static Card generateRandomCard(Deck deck)
    {
-	   Deck deck = new Deck();
 	   deck.shuffle();
 	   Card card = deck.dealCard();
 	   return card; 

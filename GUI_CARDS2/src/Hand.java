@@ -55,8 +55,9 @@ class Hand {
        Card tempCard = new Card('Z', Card.Suit.SPADES);
        if (this.numCards > 0)
        {
-           this.numCards--;
+    	   this.numCards--;
            tempCard = this.myCards[this.numCards-1];
+           
        }
        
        return tempCard;
@@ -71,7 +72,14 @@ class Hand {
        String tempCards = "";
        for(int i = 0; i < numCards; i++)
        {
-           tempCards += myCards[i].toString() + ", ";
+    	   if (i != numCards-1)
+    	   {
+    		   tempCards += myCards[i].toString() + ", ";  
+    	   }
+    	   else
+    	   {
+    		   tempCards += myCards[i].toString();  
+    	   }
        }
        return tempCards;
    }

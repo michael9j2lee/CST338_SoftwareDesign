@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Card
 {
    public enum Suit {SPADES, HEARTS, CLUBS, DIAMONDS}; 
@@ -125,4 +127,6 @@ class Card
    {
       return "123456789TJQKAX".contains(Character.toString(value)) && suit!=null; 
    }
+   
+
 }
