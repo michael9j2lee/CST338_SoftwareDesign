@@ -173,6 +173,24 @@ class Deck
 	   return topCard;
    }
    
+   // Removes Card from array
+   public boolean removeCard(Card card)
+   {
+	   boolean checkCardRemoved = false;
+	   int counter = 0;
+	   while(!checkCardRemoved && counter < CARDS_IN_PACK )
+	   {
+		   if (card.equals(masterPack[counter]))
+		   {
+			   masterPack[counter]= dealCard();
+			   return true;
+		   }
+		   // not found
+		   counter ++;
+	   }
+	   return false;
+   }
+   
 }
 
 
