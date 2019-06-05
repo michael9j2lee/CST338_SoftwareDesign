@@ -31,6 +31,7 @@ public class CardTable extends JFrame{
 		
 		this.numPlayers = numPlayers;
 		this.numCardsPerHand = numCardsPerHand;
+		
 		pnlComputerHand = new JPanel();
 		pnlComputerHand.setLayout(new GridLayout(1,numCardsPerHand));
 		
@@ -42,7 +43,7 @@ public class CardTable extends JFrame{
 		this.add(pnlComputerHand, BorderLayout.NORTH);
 		
 		pnlHumanHand = new JPanel();
-		TitledBorder borderHuman = new TitledBorder("Computer Hand");
+		TitledBorder borderHuman = new TitledBorder("Your Hand");
 		borderHuman.setTitleJustification(TitledBorder.LEFT);
 		borderHuman.setTitlePosition(TitledBorder.TOP);
 		pnlHumanHand.setBorder(borderHuman);
@@ -57,10 +58,10 @@ public class CardTable extends JFrame{
 		borderPlay.setTitleJustification(TitledBorder.LEFT);
 		borderPlay.setTitlePosition(TitledBorder.TOP);
 		pnlPlayArea.setBorder(borderPlay);
-		pnlPlayArea.setLayout(new GridLayout(2,numCardsPerHand));
-		pnlPlayArea.setPreferredSize(size);
+		pnlPlayArea.setLayout(new GridLayout(2,3));
 		pnlPlayArea.setPreferredSize(size);
 		this.add(pnlPlayArea,BorderLayout.CENTER);
+		
 
 	}
 	

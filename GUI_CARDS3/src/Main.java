@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -35,9 +34,10 @@ public class Main
 	  Hand compHand = highCardGame.getHand(0);
 	  Hand playerHand = highCardGame.getHand(1);
 	  
+	  System.out.println(compHand.toString());
+	  System.out.println(playerHand.toString() + "\n\n");
 	  
       int k;
-      Icon tempIcon;
      
       // establish main frame in which program will run
       CardTable myCardTable = new CardTable("CardTable", NUM_CARDS_PER_HAND, NUM_PLAYERS);
@@ -47,7 +47,12 @@ public class Main
       
       // show everything to the user
       myCardTable.setVisible(true);
-
+      
+      
+      JLabel winLabel = new JLabel();
+      winLabel.setHorizontalAlignment(JLabel.CENTER);
+      JLabel empty = new JLabel();
+      
       
       // CREATE LABELS ----------------------------------------------------
       //Iterate through number of cards
@@ -55,7 +60,7 @@ public class Main
       {
     	 computerLabels[a] = new JLabel();
     	 humanButtons[a] = new JButton();
-    	 humanButtons[a].addActionListener(new Action(a,compHand, playerHand));
+    	 humanButtons[a].addActionListener(new Action(a,compHand, playerHand, winLabel));
       }
       //Iterate through number of players
       for (int b = 0; b < NUM_PLAYERS ; b++)
@@ -65,13 +70,15 @@ public class Main
     	  playLabelText[b] = new JLabel();
     	  playLabelText[b].setHorizontalAlignment(JLabel.CENTER);
       }
-      
       myCardTable.pnlPlayArea.add(playedCardLabels[0]); 
+      myCardTable.pnlPlayArea.add(winLabel);
 	  myCardTable.pnlPlayArea.add(playedCardLabels[1]);  
 	  myCardTable.pnlPlayArea.add(playLabelText[0]);
+	  myCardTable.pnlPlayArea.add(empty);
 	  myCardTable.pnlPlayArea.add(playLabelText[1]);
       playLabelText[0].setText("Computer");
 	  playLabelText[1].setText("You");
+ 
       
       
 	  GUICard.loadCardIcons();
@@ -79,7 +86,7 @@ public class Main
 
       
 	  
-      
+      System.out.println(playerHand.inspectCard(0)+"\n\n");
       
 	  
 //      System.out.printf("Player : %s", playerHand.toString());
@@ -108,19 +115,119 @@ public class Main
 	   private int cardNumber;
 	   private Hand compHand;
 	   private Hand playerHand;
+	   private JLabel winLabel;
 	   
-	   public Action(int cardNumber, Hand compHand, Hand playerHand)
+	   public Action(int cardNumber, Hand compHand, Hand playerHand, JLabel winLabel)
 	   {
 		   this.cardNumber = cardNumber;
 		   this.compHand = compHand;
 		   this.playerHand = playerHand;
+		   this.winLabel = winLabel;
 	   }
 	   
 	   public void actionPerformed(ActionEvent e)
 	   {
-		   playedCardLabels[0].setIcon(GUICard.getIcon(compHand.inspectCard(cardNumber)));
-		   playedCardLabels[1].setIcon(GUICard.getIcon(playerHand.inspectCard(cardNumber)));
+	      playedCardLabels[0].setIcon(GUICard.getIcon(compHand.inspectCard(cardNumber)));
+	      playedCardLabels[1].setIcon(GUICard.getIcon(playerHand.inspectCard(cardNumber)));
+	      
+	      Card compCard = compHand.inspectCard(cardNumber);
+	      
+	      Card playerCard = playerHand.inspectCard(cardNumber);
+	      
+	      System.out.println(compCard.toString());
+	      System.out.println(playerCard.toString());
+	      
+	      if(comparing(playerCard, compCard) == "WIN")
+	      {
+	         this.winLabel.setText("YOU WIN!");
+	      }
+	      else if(comparing(playerCard, compCard) == "LOSE"){
+	    	  winLabel.setText("YOU LOSE!");
+	      }
+	      else
+	      {
+	    	  winLabel.setText("YOU TIE!");
+	      }
+	      
+	   }
+	   
+	   static String comparing(Card b, Card a)
+	   {
+	      int suitA = getSuitNum(a);
+	      int suitB = getSuitNum(b);
+	      int valueA = valueAsInt(a);
+	      int valueB = valueAsInt(b);
+	      
+	      System.out.println("YOU : " + a + " COMPUTER : " + b);
+	      
+	      if (valueA > valueB)
+	      {
+	         return "WIN";
+	      }
+	      else if (valueA == valueB && suitA > suitB)
+	      {
+	         return "WIN";
+	      }
+	      else if(a.equals(b))
+	      {
+	         return "TIE";
+	      }
+	      else
+	         return "LOSE";
+	   }
+	 
+	   private static int valueAsInt(Card card)
+	   {
+		   char value = card.getValue();
+		   //System.out.printf("Value : %s%n",value);
+		   switch (value)
+		   {
+		   case 'A':
+			   return 13;
+		   case 'K':
+			   return 12;
+		   case 'Q':
+			   return 11;
+		   case 'J':
+			   return 10;
+		   case 'T':
+			   return 9;
+		   case 'X':
+			   return 0;
+		   default:
+			   int val = value - '0';
+			   val = val;
+			   //System.out.printf("DEFAULT : %d%n", val);
+			   return (val);
+		   }
+				   
+	   }
+	   private static int getSuitNum(Card card)
+	   {
+		   Card.Suit suit = card.getSuit();
+		   //System.out.println("CARD =" +card.toString());
+		   if (suit == Card.Suit.SPADES)
+		   {
+			   	return 0;	   
+		   }
+		   else if (suit == Card.Suit.DIAMONDS)
+		   {
+			   return 1;
+		   }
+		   else if (suit == Card.Suit.HEARTS) {
+			   return 2;
+		   }
+		   else if (suit == Card.Suit.CLUBS) {
+			   return 3;
+		   }
+		   // Failed
+		   else
+		   {
+			   return 4;
+		   }
 	   }
    }
+   
+   
 }
 
