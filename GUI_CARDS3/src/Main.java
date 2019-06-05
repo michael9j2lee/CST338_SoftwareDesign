@@ -11,7 +11,7 @@ public class Main
    static int NUM_CARDS_PER_HAND = 7;
    static int  NUM_PLAYERS = 2;
    static JLabel[] computerLabels = new JLabel[NUM_CARDS_PER_HAND];
-   static JLabel[] humanLabels = new JLabel[NUM_CARDS_PER_HAND];  
+   static JButton[] humanLabels = new JButton[NUM_CARDS_PER_HAND];  
    static JLabel[] playedCardLabels  = new JLabel[NUM_PLAYERS]; 
    static JLabel[] playLabelText  = new JLabel[NUM_PLAYERS]; 
    
@@ -50,7 +50,7 @@ public class Main
       for (int a = 0; a < NUM_CARDS_PER_HAND; a++)
       {
     	 computerLabels[a] = new JLabel();
-    	 humanLabels[a] = new JLabel();
+    	 humanLabels[a] = new JButton();
       }
       //Iterate through number of players
       for (int b = 0; b < NUM_PLAYERS ; b++)
