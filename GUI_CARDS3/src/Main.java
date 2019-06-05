@@ -1,13 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.util.Random;
 
 public class Main
 {
-	
-	
-	
    static int NUM_CARDS_PER_HAND = 7;
    static int  NUM_PLAYERS = 2;
    static JLabel[] computerLabels = new JLabel[NUM_CARDS_PER_HAND];
@@ -48,8 +46,10 @@ public class Main
       // show everything to the user
       myCardTable.setVisible(true);
       
-      
+      // Create a win label
+      Font labelFont = new Font(Font.SANS_SERIF, Font.BOLD, 25);
       JLabel winLabel = new JLabel();
+      winLabel.setFont(labelFont);
       winLabel.setHorizontalAlignment(JLabel.CENTER);
       JLabel empty = new JLabel();
       
@@ -79,18 +79,8 @@ public class Main
       playLabelText[0].setText("Computer");
 	  playLabelText[1].setText("You");
  
-      
-      
-	  GUICard.loadCardIcons();
-      
 
-      
-	  
-      System.out.println(playerHand.inspectCard(0)+"\n\n");
-      
-	  
-//      System.out.printf("Player : %s", playerHand.toString());
-//      System.out.printf("Comp : %s", compHand.toString());
+	  GUICard.loadCardIcons();
 	  
       // ADD LABELS TO PANELS -----------------------------------------
       for (k = 0; k < NUM_CARDS_PER_HAND; k++)
@@ -102,10 +92,6 @@ public class Main
       	  myCardTable.pnlHumanHand.add(humanButtons[k]);
       	  System.out.printf("%d%n", k);
       }
-      
-      
-
-
 	  myCardTable.setVisible(true);
    }
 
@@ -160,7 +146,7 @@ public class Main
 	      
 	      System.out.println("YOU : " + a + " COMPUTER : " + b);
 	      
-	      if (valueA > valueB)
+	      if (valueB > valueA)
 	      {
 	         return "WIN";
 	      }
@@ -199,8 +185,7 @@ public class Main
 			   val = val;
 			   //System.out.printf("DEFAULT : %d%n", val);
 			   return (val);
-		   }
-				   
+		   }   
 	   }
 	   private static int getSuitNum(Card card)
 	   {

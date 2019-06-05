@@ -55,55 +55,57 @@ public class GUICard {
 	}
 	
 	
-	  private static int valueAsInt(Card card)
-	   {
-		   char value = card.getValue();
-		   //System.out.printf("Value : %s%n",value);
-		   switch (value)
-		   {
-		   case 'A':
-			   return 13;
-		   case 'K':
-			   return 12;
-		   case 'Q':
-			   return 11;
-		   case 'J':
-			   return 10;
-		   case 'T':
-			   return 9;
-		   case 'X':
-			   return 0;
-		   default:
-			   int val = value - '0';
-			   //System.out.printf("DEFAULT : %d%n", val);
-			   return (val);
-		   }
-				   
-	   }
-	   private static int suitAsInt(Card card)
-	   {
-		   Card.Suit suit = card.getSuit();
-		   //System.out.println("CARD =" +card.toString());
-		   if (suit == Card.Suit.SPADES)
-		   {
-			   	return 0;	   
-		   }
-		   else if (suit == Card.Suit.DIAMONDS)
-		   {
-			   return 1;
-		   }
-		   else if (suit == Card.Suit.HEARTS) {
-			   return 2;
-		   }
-		   else if (suit == Card.Suit.CLUBS) {
-			   return 3;
-		   }
-		   // Failed
-		   else
-		   {
-			   return 4;
-		   }
-	   }
+    private static int valueAsInt(Card card)
+    {
+       char value = card.getValue();
+       //System.out.printf("Value : %s%n",value);
+       switch (value)
+       {
+       case 'A':
+          return 13;
+       case 'K':
+          return 12;
+       case 'Q':
+          return 11;
+       case 'J':
+          return 10;
+       case 'T':
+          return 9;
+       case 'X':
+          return 0;
+       default:
+          int val = value - '1';
+          //System.out.printf("DEFAULT : %d%n", val);
+          return (val);
+       }
+             
+    }
+    private static int suitAsInt(Card card)
+    {
+       Card.Suit suit = card.getSuit();
+       //System.out.println("CARD =" +card.toString());
+       if (suit == Card.Suit.SPADES)
+       {
+             return 3;      
+       }
+       else if (suit == Card.Suit.HEARTS)
+       {
+          return 2;
+       }
+       else if (suit == Card.Suit.DIAMONDS) {
+          return 1;
+       }
+       else if (suit == Card.Suit.CLUBS) {
+          return 0;
+       }
+       // Failed
+       else
+       {
+          return 4;
+       }
+    }
+    
+    
    // turns 0 - 13 into "A", "2", "3", ... "Q", "K", "X"
    static String turnIntIntoCardValue(int k)
    {
