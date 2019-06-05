@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class Main 
+public class Main
 {
 	
 	
@@ -11,7 +12,7 @@ public class Main
    static int NUM_CARDS_PER_HAND = 7;
    static int  NUM_PLAYERS = 2;
    static JLabel[] computerLabels = new JLabel[NUM_CARDS_PER_HAND];
-   static JButton[] humanLabels = new JButton[NUM_CARDS_PER_HAND];  
+   static JButton[] humanButtons = new JButton[NUM_CARDS_PER_HAND];  
    static JLabel[] playedCardLabels  = new JLabel[NUM_PLAYERS]; 
    static JLabel[] playLabelText  = new JLabel[NUM_PLAYERS]; 
    
@@ -31,6 +32,9 @@ public class Main
 	  // start new game
 	  highCardGame.newGame();
 	  highCardGame.deal();
+	  Hand compHand = highCardGame.getHand(0);
+	  Hand playerHand = highCardGame.getHand(1);
+	  
 	  
       int k;
       Icon tempIcon;
@@ -50,7 +54,8 @@ public class Main
       for (int a = 0; a < NUM_CARDS_PER_HAND; a++)
       {
     	 computerLabels[a] = new JLabel();
-    	 humanLabels[a] = new JButton();
+    	 humanButtons[a] = new JButton();
+    	 humanButtons[a].addActionListener(new Action(a,compHand, playerHand));
       }
       //Iterate through number of players
       for (int b = 0; b < NUM_PLAYERS ; b++)
@@ -71,8 +76,7 @@ public class Main
       
 	  GUICard.loadCardIcons();
       
-	  Hand compHand = highCardGame.getHand(0);
-	  Hand playerHand = highCardGame.getHand(1);
+
       
 	  
       
@@ -87,45 +91,36 @@ public class Main
     	  computerLabels[k].setIcon(GUICard.getBackCardIcon());
           myCardTable.pnlComputerHand.add(computerLabels[k]);
           
-          humanLabels[k].setIcon(GUICard.getIcon(playerHand.inspectCard(k)));
-      	  myCardTable.pnlHumanHand.add(humanLabels[k]);
+          humanButtons[k].setIcon(GUICard.getIcon(playerHand.inspectCard(k)));
+      	  myCardTable.pnlHumanHand.add(humanButtons[k]);
       	  System.out.printf("%d%n", k);
       }
       
       
-      playedCardLabels[0].setIcon(GUICard.getIcon(compHand.inspectCard(0)));
-	  playedCardLabels[1].setIcon(GUICard.getIcon(playerHand.inspectCard(0)));
+
 
 	  myCardTable.setVisible(true);
    }
-   
-   public class AnonymousInnerClassEx extends JFrame {
 
-	    public AnonymousInnerClassEx() {
 
-	        initUI();
-	    }
-
-	    private void initUI() {
-	    	
-	    	
-	    	//ADD ALL THE BUTTONS HERE
-	    	
-//	        JButton closeBtn = new JButton("Close");
-//
-//	        closeBtn.addActionListener(new ActionListener() {
-//	            
-//	            @Override
-//	            public void actionPerformed(ActionEvent event) {
-//	                System.exit(0);
-//	            }
-//	        });
-
-	        
-
-	        setTitle("Anonymous inner class");
-	        setLocationRelativeTo(null);
-	        setDefaultCloseOperation(EXIT_ON_CLOSE);
-	    }
+   static class Action implements ActionListener
+   {
+	   private int cardNumber;
+	   private Hand compHand;
+	   private Hand playerHand;
+	   
+	   public Action(int cardNumber, Hand compHand, Hand playerHand)
+	   {
+		   this.cardNumber = cardNumber;
+		   this.compHand = compHand;
+		   this.playerHand = playerHand;
+	   }
+	   
+	   public void actionPerformed(ActionEvent e)
+	   {
+		   playedCardLabels[0].setIcon(GUICard.getIcon(compHand.inspectCard(cardNumber)));
+		   playedCardLabels[1].setIcon(GUICard.getIcon(playerHand.inspectCard(cardNumber)));
+	   }
    }
 }
+
